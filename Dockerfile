@@ -1,14 +1,22 @@
-# Use a imagem oficial do Java
-FROM openjdk:17-jdk-slim
+# Etapa 1: Build da aplicação
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-# Crie um diretório para o app
 WORKDIR /app
 
-# Copie o arquivo jar
-COPY target/*.jar app.jar
+# Copia os arquivos do projeto
+COPY . .
 
-# Exponha a porta que o Spring usa
+# Builda o projeto e gera o .jar
+RUN mvn clean package -DskipTests
+
+# Etapa 2: Imagem de produção
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copia o jar da etapa de build
+COPY --from=builder /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Comando de inicialização
 ENTRYPOINT ["java", "-jar", "app.jar"]
