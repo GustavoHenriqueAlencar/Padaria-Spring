@@ -1,28 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Usuário</title>
+    <meta charset="UTF-8" />
+    <title>Formulários de Usuário</title>
 </head>
 <body>
-<h1>Cadastro de Usuário</h1>
-<form action="/usuarios" method="post">
+<h1>Cadastro de Usuário (POST)</h1>
+<form action="/usuario" method="post">
     <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required><br><br>
+    <input type="text" id="nome" name="nome" required /><br /><br />
 
     <label for="cpf">CPF:</label>
-    <input type="text" id="cpf" name="cpf" required><br><br>
+    <input type="text" id="cpf" name="cpf" required /><br /><br />
 
     <label for="dataNascimento">Data de Nascimento:</label>
-    <input type="date" id="dataNascimento" name="dataNascimento" required><br><br>
+    <input type="date" id="dataNascimento" name="dataNascimento" required /><br /><br />
 
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
+    <input type="email" id="email" name="email" required /><br /><br />
 
     <label for="telefone">Telefone:</label>
-    <input type="tel" id="telefone" name="telefone" required><br><br>
+    <input type="tel" id="telefone" name="telefone" required /><br /><br />
 
     <button type="submit">Cadastrar</button>
 </form>
+
+<hr />
+
+<h1>Buscar Usuário por CPF (GET)</h1>
+<form action="/usuario" method="get">
+    <label for="cpfGet">CPF:</label>
+    <input type="text" id="cpfGet" name="cpf" required />
+    <button type="submit">Buscar</button>
+</form>
+
+<hr />
+
+<h1>Alterar Usuário por CPF (PUT)</h1>
+<!-- Navegadores não suportam PUT nativamente, usar POST com _method=PUT ou ferramenta externa -->
+<!-- Aqui só um formulário básico com método POST apontando pra /usuario?cpf=xxx e backend que interprete -->
+<form action="/usuario" method="post" onsubmit="return confirm('PUT via POST? Backend deve suportar método override');">
+    <input type="hidden" name="_method" value="put" />
+    <label for="cpfPut">CPF (para alterar):</label>
+    <input type="text" id="cpfPut" name="cpf" required /><br /><br />
+
+    <label for="nomePut">Nome:</label>
+    <input type="text" id="nomePut" name="nome" /><br /><br />
+
+    <label for="dataNascimentoPut">Data de Nascimento:</label>
+    <input type="date" id="dataNascimentoPut" name="dataNascimento" /><br /><br />
+
+    <label for="emailPut">Email:</label>
+    <input type="email" id="emailPut" name="email" /><br /><br />
+
+    <label for="telefonePut">Telefone:</label>
+    <input type="tel" id="telefonePut" name="telefone" /><br /><br />
+
+    <button type="submit">Alterar</button>
+</form>
+
+<hr />
+
+<h1>Deletar Usuário por CPF (DELETE)</h1>
+<!-- Mesma limitação do método DELETE em formulário HTML -->
+<form action="/usuario" method="post" onsubmit="return confirm('DELETE via POST? Backend deve suportar método override');">
+    <input type="hidden" name="_method" value="delete" />
+    <label for="cpfDelete">CPF:</label>
+    <input type="text" id="cpfDelete" name="cpf" required />
+    <button type="submit">Deletar</button>
+</form>
+
 </body>
 </html>
