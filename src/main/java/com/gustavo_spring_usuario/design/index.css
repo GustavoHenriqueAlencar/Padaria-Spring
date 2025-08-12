@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+  }
+
+.header {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+  }
+  
+  /* Container for flexboxes */
+  .row {
+    display: -webkit-flex;
+    display: flex;
+  }
+  
+  /* Create three equal columns that sits next to each other */
+  .column {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 10px;
+  }
+  
+  /* Style the footer */
+  .footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+  }
+
+  nav {
+    background-color: #333; /* Cor de fundo escura */
+    position: fixed; /* Fixa a navbar no topo */
+    top: -60px;
+    left: 0;
+    width: 100%; /* Garante que a navbar ocupe toda a largura */
+    z-index: 1000; /* Para garantir que ela fique sobre outros elementos */
+    transition: top 0.3s ease; /* Transição suave ao mostrar/esconder */
+    justify-content: flex-start; /* Logo à esquerda */
+    align-items: center; /* Alinha a logo e os links verticalmente */
+
+    
+  }
+
+  nav .logo {
+    display: flex;
+    align-items: center;
+    margin-right: auto; /* Impede que a logo empurre os links */
+}
+
+nav ul {
+    list-style-type: none; /* Remove os marcadores da lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Alinha os itens horizontalmente */
+    justify-content: center; /* Alinha os links ao centro */
+    width: 100%; /* Ocupa todo o espaço restante */
+}
+
+  nav ul li {
+    margin: 0 20px; /* Espaço entre os itens */
+  }
+
+  nav a {
+    color: white; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    padding: 14px 20px; /* Espaço interno ao redor do texto */
+    display: block; /* Faz o link ocupar todo o espaço disponível */
+  }
+  
+  nav a:hover {
+    background-color: #555; /* Cor ao passar o mouse */
+  }
