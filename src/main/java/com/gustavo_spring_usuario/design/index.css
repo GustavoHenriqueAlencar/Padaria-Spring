@@ -21,6 +21,7 @@
     -ms-flex: 1;
     flex: 1;
     padding: 10px;
+    justify-items: center;
   }
   
   /* Style the footer */
@@ -38,8 +39,10 @@
     width: 100%; /* Garante que a navbar ocupe toda a largura */
     z-index: 1000; /* Para garantir que ela fique sobre outros elementos */
     transition: top 0.3s ease; /* Transição suave ao mostrar/esconder */
-    justify-content: flex-start; /* Logo à esquerda */
     align-items: center; /* Alinha a logo e os links verticalmente */
+
+    display: flex; /* Adicionado */
+    justify-content: space-between; /* Espaça a logo da ul */
 
     
   }
@@ -47,7 +50,10 @@
   nav .logo {
     display: flex;
     align-items: center;
-    margin-right: auto; /* Impede que a logo empurre os links */
+}
+
+nav .logo img {
+  height: 40px;
 }
 
 nav ul {
@@ -73,3 +79,155 @@ nav ul {
   nav a:hover {
     background-color: #555; /* Cor ao passar o mouse */
   }
+
+  .dropdown-container {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+    width: 100%;
+    align-items: center;    
+}
+
+.dropdown {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 80%;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 20px;
+}
+
+.dropdown-content {
+    display: none;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.crud-container {
+  width: 80%;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  background-color: #fdfdfd;
+}
+
+.crud-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.crud-actions input {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.crud-actions button {
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.crud-actions button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+thead {
+  background-color: #333;
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.custom-checkbox {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+  border: 2px solid #999;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.custom-checkbox:hover .checkmark {
+  background-color: #ccc;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #333;
+  border-color: #333;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Checkmark estilizado (em forma de ✓) */
+.custom-checkbox .checkmark:after {
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+

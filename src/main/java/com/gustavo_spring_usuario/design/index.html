@@ -16,7 +16,9 @@
         <nav id="navbar">
 
             <div class="logo">
-                <a href="#main"><img src="" alt="logo">aa</a>
+                <a href="#main"><img
+                        src="https://img.freepik.com/vetores-gratis/vetor-de-gradiente-de-logotipo-colorido-de-passaro_343694-1365.jpg"
+                        alt="logo"></a>
             </div>
 
             <ul>
@@ -30,10 +32,77 @@
     </div>
 
     <div class="row">
-        <div class="column" style="background-color:#aaa;">Column</div>
-        <div class="column" style="background-color:#bbb;">Column</div>
-        <div class="column" style="background-color:#ccc;">Column</div>
+
+        <div class="dropdown-container">
+
+            <div class="column">
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Clientes</button>
+                    <div class="dropdown-content">
+                        <!-- Aqui entra seu CRUD de Clientes -->
+                        <p>CRUD de Clientes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Produtos</button>
+                    <div class="dropdown-content">
+                        <!-- Aqui entra seu CRUD de Produtos -->
+                        <p>CRUD de Produtos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="dropdown">
+                    <button class="dropdown-toggle">Pedidos</button>
+                    <div class="dropdown-content">
+                        <!-- Aqui entra seu CRUD de Pedidos -->
+                        <p>CRUD de Pedidos</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+    <div class="row">
+
+        <div class="crud-container">
+            <div class="crud-actions">
+                <input type="text" id="search-input" placeholder="Pesquisar...">
+                <button id="new-user">Novo Usuário</button>
+                <button id="edit-user" disabled>Editar</button>
+                <button id="delete-user" disabled>Excluir</button>
+            </div>
+
+            <table id="user-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="select-all">
+                                <span class="checkmark"></span>
+                            </label>
+                        </th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Data Nascimento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linhas geradas dinamicamente -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
 
     <div class="footer">
         <p>Footer</p>
