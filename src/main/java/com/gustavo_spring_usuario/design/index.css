@@ -304,3 +304,36 @@ tbody tr:hover {
   background: black; /* fundo sólido para não ficar transparente */
   z-index: 2; /* garante que fique sobre as células */
 }
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-right {
+  flex: 1;
+  text-align: right;
+}
+
+.footer-icon {
+  width: 28px;
+  height: 28px;
+  margin-left: 12px;
+  vertical-align: middle;
+  transition: transform 0.2s;
+  filter: grayscale(30%);
+}
+
+.footer-icon:hover {
+  transform: scale(1.15);
+  filter: none;
+}
