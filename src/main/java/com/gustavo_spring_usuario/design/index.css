@@ -1,55 +1,78 @@
 * {
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
+
+html body {
+  height: 100vh;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  /* Faz o conteúdo ocupar todo o espaço restante */
+}
 
 .header {
-    background-color: #f1f1f1;
-    padding: 30px;
-    text-align: center;
-    font-size: 35px;
-  }
-  
-  /* Container for flexboxes */
-  .row {
-    display: -webkit-flex;
-    display: flex;
-  }
-  
-  /* Create three equal columns that sits next to each other */
-  .column {
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    padding: 10px;
-    justify-items: center;
-  }
-  
-  /* Style the footer */
-  .footer {
-    background-color: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-  }
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+}
 
-  nav {
-    background-color: #333; /* Cor de fundo escura */
-    position: fixed; /* Fixa a navbar no topo */
-    top: -60px;
-    left: 0;
-    width: 100%; /* Garante que a navbar ocupe toda a largura */
-    z-index: 1000; /* Para garantir que ela fique sobre outros elementos */
-    transition: top 0.3s ease; /* Transição suave ao mostrar/esconder */
-    align-items: center; /* Alinha a logo e os links verticalmente */
+/* Container for flexboxes */
+.row {
+  display: -webkit-flex;
+  display: flex;
+}
 
-    display: flex; /* Adicionado */
-    justify-content: space-between; /* Espaça a logo da ul */
+/* Create three equal columns that sits next to each other */
+.column {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 10px;
+  justify-items: center;
+}
 
-    
-  }
+/* Style the footer */
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
 
-  nav .logo {
-    display: flex;
-    align-items: center;
+nav {
+  background-color: #333;
+  /* Cor de fundo escura */
+  position: fixed;
+  /* Fixa a navbar no topo */
+  top: -60px;
+  left: 0;
+  width: 100%;
+  /* Garante que a navbar ocupe toda a largura */
+  z-index: 1000;
+  /* Para garantir que ela fique sobre outros elementos */
+  transition: top 0.3s ease;
+  /* Transição suave ao mostrar/esconder */
+  align-items: center;
+  /* Alinha a logo e os links verticalmente */
+
+  display: flex;
+  /* Adicionado */
+  justify-content: space-between;
+  /* Espaça a logo da ul */
+
+
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
 }
 
 nav .logo img {
@@ -57,59 +80,69 @@ nav .logo img {
 }
 
 nav ul {
-    list-style-type: none; /* Remove os marcadores da lista */
-    margin: 0;
-    padding: 0;
-    display: flex; /* Alinha os itens horizontalmente */
-    justify-content: center; /* Alinha os links ao centro */
-    width: 100%; /* Ocupa todo o espaço restante */
+  list-style-type: none;
+  /* Remove os marcadores da lista */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* Alinha os itens horizontalmente */
+  justify-content: center;
+  /* Alinha os links ao centro */
+  width: 100%;
+  /* Ocupa todo o espaço restante */
 }
 
-  nav ul li {
-    margin: 0 20px; /* Espaço entre os itens */
-  }
+nav ul li {
+  margin: 0 20px;
+  /* Espaço entre os itens */
+}
 
-  nav a {
-    color: white; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado */
-    padding: 14px 20px; /* Espaço interno ao redor do texto */
-    display: block; /* Faz o link ocupar todo o espaço disponível */
-  }
-  
-  nav a:hover {
-    background-color: #555; /* Cor ao passar o mouse */
-  }
+nav a {
+  color: white;
+  /* Cor do texto */
+  text-decoration: none;
+  /* Remove o sublinhado */
+  padding: 14px 20px;
+  /* Espaço interno ao redor do texto */
+  display: block;
+  /* Faz o link ocupar todo o espaço disponível */
+}
 
-  .dropdown-container {
-    display: flex;
-    gap: 10px;
-    margin: 20px;
-    width: 100%;
-    align-items: center;    
+nav a:hover {
+  background-color: #555;
+  /* Cor ao passar o mouse */
+}
+
+.dropdown-container {
+  display: flex;
+  gap: 10px;
+  margin: 20px;
+  width: 100%;
+  align-items: center;
 }
 
 .dropdown {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    overflow: hidden;
-    width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 80%;
 }
 
 .dropdown-toggle {
-    width: 100%;
-    padding: 15px;
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    font-size: 20px;
+  width: 100%;
+  padding: 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 20px;
 }
 
 .dropdown-content {
-    display: none;
-    padding: 15px;
-    background-color: #f9f9f9;
+  display: none;
+  padding: 15px;
+  background-color: #f9f9f9;
 }
 
 .crud-container {
@@ -164,10 +197,27 @@ thead {
   color: white;
 }
 
-th, td {
+thead th {
+  text-overflow: ellipsis;
+  /* Adiciona "..." se o texto for longo demais */
+  overflow: hidden;
+  /* Oculta o texto que ultrapassa */
+}
+
+th,
+td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
+  word-wrap: break-word;
+  /* Quebra as palavras longas */
+  word-break: normal;
+  /* Quebra qualquer palavra que ultrapasse a célula */
+}
+
+td {
+  background-color: white;
+  color: black;
 }
 
 tbody tr:hover {
@@ -205,7 +255,7 @@ tbody tr:hover {
   background-color: #ccc;
 }
 
-.custom-checkbox input:checked ~ .checkmark {
+.custom-checkbox input:checked~.checkmark {
   background-color: #333;
   border-color: #333;
 }
@@ -216,7 +266,7 @@ tbody tr:hover {
   display: none;
 }
 
-.custom-checkbox input:checked ~ .checkmark:after {
+.custom-checkbox input:checked~.checkmark:after {
   display: block;
 }
 
@@ -231,3 +281,26 @@ tbody tr:hover {
   transform: rotate(45deg);
 }
 
+.table-container {
+  max-height: 60vh; /* limite da altura */
+  overflow-y: auto; /* ativa scroll */
+  border: 1px solid #ddd;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th, 
+.table-container td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.table-container th {
+  position: sticky;
+  top: 0; /* gruda no topo */
+  background: black; /* fundo sólido para não ficar transparente */
+  z-index: 2; /* garante que fique sobre as células */
+}

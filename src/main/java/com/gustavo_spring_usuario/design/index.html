@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index_modal.css">
 </head>
 
 <body>
@@ -30,6 +31,8 @@
         </nav>
 
     </div>
+
+    <main> 
 
     <div class="row">
 
@@ -78,15 +81,12 @@
                 <button id="delete-user" disabled>Excluir</button>
             </div>
 
+            <div class="table-container">
+                
             <table id="user-table">
                 <thead>
                     <tr>
-                        <th style="text-align: center;">
-                            <label class="custom-checkbox">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmark"></span>
-                            </label>
-                        </th>
+                        <th></th>
                         <th>ID</th>
                         <th>Nome</th>
                         <th>CPF</th>
@@ -97,15 +97,70 @@
                 </thead>
                 <tbody>
                     <!-- Linhas geradas dinamicamente -->
+                    <tr>
+                        <td style="text-align: center;">
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                        <td>teste</td>
+                    </tr>
                 </tbody>
             </table>
+            </div>
         </div>
 
     </div>
 
+</main>
 
     <div class="footer">
         <p>Footer</p>
+    </div>
+
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Novo Usuário</h2>
+            <form id="user-form">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone">
+
+                <label for="nascimento">Data de Nascimento:</label>
+                <input type="date" id="nascimento" name="nascimento">
+
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
     </div>
 
 </body>
