@@ -16,6 +16,7 @@
     transform: scale(1.05);
     /* leve zoom para dar efeito */
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    overflow-y: hidden;
 
 }
 

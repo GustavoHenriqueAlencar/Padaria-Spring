@@ -8,10 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:63342")
 
 public class UsuarioController {
 
@@ -30,6 +32,13 @@ public class UsuarioController {
    public ResponseEntity<Usuario> buscarUsuarioPorCpf(@RequestParam String cpf) {
        return ResponseEntity.ok(usuarioService.buscarUsuarioPorCpf(cpf));
    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
+       List<Usuario> usuarios = usuarioService.listarUsuarios();
+       return ResponseEntity.ok(usuarios);
+    }
+
    @DeleteMapping
    public ResponseEntity<Void> deletarUsuarioPorCpf(@RequestParam String cpf) {
        usuarioService.deletarUsuarioPorCpf(cpf);

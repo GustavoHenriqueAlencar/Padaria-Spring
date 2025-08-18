@@ -4,6 +4,7 @@ import com.gustavo_spring_usuario.usuario.infrastructure.entitys.Usuario;
 import com.gustavo_spring_usuario.usuario.infrastructure.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,10 @@ public class UsuarioService {
         return repository.findByCpf(cpf).orElseThrow(
                 () -> new RuntimeException("CPF não encontrado")
         );
+    }
+
+    public List<Usuario> listarUsuarios() {
+        return repository.findAll();
     }
 
     public void deletarUsuarioPorCpf(String cpf) {
