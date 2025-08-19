@@ -1,3 +1,4 @@
+// Evento para sempre que mover o mouse no topo, abrir navbar
 window.addEventListener("mousemove", function (event) {
     var navbar = document.getElementById("navbar");
 
@@ -9,6 +10,7 @@ window.addEventListener("mousemove", function (event) {
     }
 });
 
+// Evento para escutar os botões CRUD
 document.addEventListener("DOMContentLoaded", () => {
     const clientesBtn = document.getElementById("usuario-btn");
     const produtosBtn = document.getElementById("produtos-btn");
@@ -55,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selecionarBotao(clientesBtn, clientesCrud);
 });
 
-
+// Evento para abrir Modal
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("user-modal");
     const btnNovo = document.getElementById("new-user");
@@ -126,6 +128,68 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Evento para escutar sempre que uma checkbox é ativada para logica dos botões
+async function checkboxCheck() {
+    const checkboxes = document.querySelectorAll('table input[type="checkbox"]');
+    const editBtn = document.getElementById("edit-user");
+    const deleteBtn = document.getElementById("delete-user");
+
+    function updateButtons() {
+        const checkedCount = document.querySelectorAll('table input[type="checkbox"]:checked').length;
+
+        if (checkedCount === 0) {
+            editBtn.disabled = true;
+            deleteBtn.disabled = true;
+        } else if (checkedCount === 1) {
+            editBtn.disabled = false;
+            deleteBtn.disabled = false;
+        } else {
+            editBtn.disabled = true;
+            deleteBtn.disabled = false;
+        }
+    }
+
+    // Monitorar todas as checkboxes
+    checkboxes.forEach(cb => cb.addEventListener("change", updateButtons));
+
+    updateButtons(); // Inicializa o estado
+};
+
+
+// Função para aplicar os filtros na barra de pesquisa (nos 3 CRUDS, não utiliza banco)
+function aplicarFiltro(inputId, tableId) {
+    const searchInput = document.getElementById(inputId);
+    const table = document.getElementById(tableId).getElementsByTagName("tbody")[0];
+
+    searchInput.addEventListener("input", () => {
+        const filter = searchInput.value.toLowerCase();
+        const rows = table.getElementsByTagName("tr");
+
+        for (let row of rows) {
+            const cells = row.getElementsByTagName("td");
+            let match = false;
+            for (let i = 1; i < cells.length; i++) {
+                if (cells[i].textContent.toLowerCase().includes(filter)) {
+                    match = true;
+                    break;
+                }
+            }
+            row.style.display = match ? "" : "none";
+        }
+    });
+}
+
+// Evento para ativar nos três CRUDs os filtros
+document.addEventListener("DOMContentLoaded", () => {
+    listarUsuarios();
+    aplicarFiltro("search-input-usuario", "user-table");
+    aplicarFiltro("search-input-produtos", "product-table");
+    aplicarFiltro("search-input-pedidos", "purchase-table");
+});
+
+
+// Cadastrar e Editar usuario
+// Evento para escutar o submit do form da modal (cadastrar e editar)
 document.getElementById("user-form").addEventListener("submit", async function (e) {
 
         e.preventDefault(); // Impede o envio do formulário padrão
@@ -138,11 +202,11 @@ document.getElementById("user-form").addEventListener("submit", async function (
             dataNascimento: document.getElementById("nascimento").value
         };
 
-       // const id = document.getElementById("user-modal").getAttribute("data-user-id");
-    const cpf = document.getElementById("user-modal").getAttribute("data-user-cpf"); // Obtém o CPF do usuário a ser editado
+        // const id = document.getElementById("user-modal").getAttribute("data-user-id");
+        const cpf = document.getElementById("user-modal").getAttribute("data-user-cpf"); // Obtém o CPF do usuário a ser editado
 
 
-    try {
+        try {
 
             let response;
 
@@ -197,13 +261,13 @@ document.getElementById("user-form").addEventListener("submit", async function (
     }
 );
 
-
-
+// Buscar usuario
+// Função para buscar usuário (Não está sendo utilizada)
 async function buscarUsuario() {
     const cpf = document.getElementById("search-input").value;
 
     try {
-        const response = await fetch(`http://localhost:8080/usuario/cpf=${cpf}`);
+        const response = await fetch(`http://localhost:8080/usuario?cpf=${cpf}`);
         if (response.ok) {
             const usuario = await response.json();
 
@@ -216,6 +280,8 @@ async function buscarUsuario() {
 
 };
 
+// Listar usuario
+// Função para listar os usuarios na tabela
 async function listarUsuarios() {
     try {
         const response = await fetch("http://localhost:8080/usuario/all");
@@ -251,6 +317,13 @@ async function listarUsuarios() {
     }
 };
 
+// Evento para sempre que a página atualizar, listar os usuarios
+document.addEventListener("DOMContentLoaded", () => {
+    listarUsuarios();
+});
+
+// Deletar Usuario
+// Evento para escutar o button deletar usuario
 document.getElementById("delete-user").addEventListener("click", async function () {
     const checkboxSelecionada = document.querySelector('table input[type="checkbox"]:checked');
 
@@ -284,33 +357,20 @@ document.getElementById("delete-user").addEventListener("click", async function 
 });
 
 
+// Cadastrar/Editar produto
 
-document.addEventListener("DOMContentLoaded", () => {
-    listarUsuarios();
-});
 
-async function checkboxCheck() {
-    const checkboxes = document.querySelectorAll('table input[type="checkbox"]');
-    const editBtn = document.getElementById("edit-user");
-    const deleteBtn = document.getElementById("delete-user");
+// Buscar produto
 
-    function updateButtons() {
-        const checkedCount = document.querySelectorAll('table input[type="checkbox"]:checked').length;
+// Listar produto
 
-        if (checkedCount === 0) {
-            editBtn.disabled = true;
-            deleteBtn.disabled = true;
-        } else if (checkedCount === 1) {
-            editBtn.disabled = false;
-            deleteBtn.disabled = false;
-        } else {
-            editBtn.disabled = true;
-            deleteBtn.disabled = false;
-        }
-    }
+// Deletar produto
 
-    // Monitorar todas as checkboxes
-    checkboxes.forEach(cb => cb.addEventListener("change", updateButtons));
 
-    updateButtons(); // Inicializa o estado
-};
+// Cadastrar/Editar compra
+
+// Buscar compra
+
+// Listar compra
+
+// Deletar compra
