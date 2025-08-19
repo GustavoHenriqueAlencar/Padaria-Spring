@@ -40,7 +40,7 @@
 
                 <div class="column">
                     <div class="dropdown">
-                        <button class="dropdown-toggle">Clientes</button>
+                        <button class="dropdown-toggle" id="usuario-btn">Clientes</button>
                         <div class="dropdown-content">
                             <!-- Aqui entra seu CRUD de Clientes -->
                             <p>CRUD de Clientes</p>
@@ -50,7 +50,7 @@
 
                 <div class="column">
                     <div class="dropdown">
-                        <button class="dropdown-toggle">Produtos</button>
+                        <button class="dropdown-toggle" id="produtos-btn">Produtos</button>
                         <div class="dropdown-content">
                             <!-- Aqui entra seu CRUD de Produtos -->
                             <p>CRUD de Produtos</p>
@@ -60,7 +60,7 @@
 
                 <div class="column">
                     <div class="dropdown">
-                        <button class="dropdown-toggle">Pedidos</button>
+                        <button class="dropdown-toggle" id="compras-btn">Pedidos</button>
                         <div class="dropdown-content">
                             <!-- Aqui entra seu CRUD de Pedidos -->
                             <p>CRUD de Pedidos</p>
@@ -73,9 +73,11 @@
 
         <div class="row">
 
-            <div class="crud-container">
+<!--            Crud de clientes visual-->
+
+            <div id="usuario-crud" class="crud-container">
                 <div class="crud-actions">
-                    <input type="text" id="search-input" placeholder="Pesquisar...">
+                    <input type="text" id="search-input-usuario" placeholder="Pesquisar Clientes...">
                     <button id="new-user">Novo Usuário</button>
                     <button id="edit-user" disabled>Editar</button>
                     <button id="delete-user" disabled>Excluir</button>
@@ -120,6 +122,110 @@
                                 </td>
                                 <td>teste</td>
                                 <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+<!--            Crud de produtos visual-->
+
+            <div id="produtos-crud" class="crud-container" style="display: none">
+                <div class="crud-actions">
+                    <input type="text" id="search-input-produtos" placeholder="Pesquisar Produtos...">
+                    <button id="new-product">Novo Usuário</button>
+                    <button id="edit-product" disabled>Editar</button>
+                    <button id="delete-product" disabled>Excluir</button>
+                </div>
+
+                <div class="table-container">
+
+                    <table id="product-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas geradas dinamicamente -->
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+<!--            Crud de compras visual-->
+
+            <div id="compras-crud" class="crud-container" style="display: none">
+                <div class="crud-actions" >
+                    <input type="text" id="search-input-pedidos" placeholder="Pesquisar Compras...">
+                    <button id="new-purchase">Novo Usuário</button>
+                    <button id="edit-purchase" disabled>Editar</button>
+                    <button id="delete-purchase" disabled>Excluir</button>
+                </div>
+
+                <div class="table-container">
+
+                    <table id="purchase-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Usuario_ID</th>
+                                <th>Valor Total</th>
+                                <th>Data Compra</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Linhas geradas dinamicamente -->
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
+                                <td>teste</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
                                 <td>teste</td>
                                 <td>teste</td>
                                 <td>teste</td>

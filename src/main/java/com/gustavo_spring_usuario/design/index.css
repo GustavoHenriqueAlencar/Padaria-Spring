@@ -337,3 +337,31 @@ tbody tr:hover {
   transform: scale(1.15);
   filter: none;
 }
+
+/* Estilo padrão dos botões */
+.dropdown-toggle {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Estilo do botão quando ele está ativo */
+.dropdown-toggle.active {
+  background-color: #45a049;
+}
+
+/* Ocultar os conteúdos inicialmente */
+.crud-container {
+  display: none;
+}
+
+/* Exibir o conteúdo do CRUD quando necessário */
+.crud-container.active {
+  display: block;
+}
+
+
