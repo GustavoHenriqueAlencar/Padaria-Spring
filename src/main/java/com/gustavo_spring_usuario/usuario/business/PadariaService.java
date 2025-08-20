@@ -2,8 +2,11 @@ package com.gustavo_spring_usuario.usuario.business;
 
 
 import com.gustavo_spring_usuario.usuario.infrastructure.entitys.Padaria;
+import com.gustavo_spring_usuario.usuario.infrastructure.entitys.Usuario;
 import com.gustavo_spring_usuario.usuario.infrastructure.repository.PadariaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PadariaService {
@@ -22,6 +25,10 @@ public class PadariaService {
         return repository.findById(id).orElseThrow(
                 () -> new RuntimeException("Id não encontrado!")
         );
+    }
+
+    public List<Padaria> listarPadarias() {
+        return repository.findAll();
     }
 
     public void deletarPadariaPorId(Integer id) {

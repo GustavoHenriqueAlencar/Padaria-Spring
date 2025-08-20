@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         inputPrecoProduto.value = cells[3].textContent.trim();
 
 
-        modalProduto.setAttribute("data-product-id", idProduto.value);
+        modalProduto.setAttribute("data-product-id", idProduto);
 
         modalProduto.querySelector("h2").textContent = "Editar Produto";
         modalProduto.classList.add("show");
@@ -183,6 +183,14 @@ document.addEventListener("DOMContentLoaded", () => {
         inputPrecoProduto.value = "";
     }
 });
+
+// Função fechar modal
+function fecharFormulario(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        modal.classList.remove("show");
+    }
+}
 
 // Evento para escutar sempre que uma checkbox é ativada para logica dos botões
 async function checkboxCheck() {
@@ -210,6 +218,33 @@ async function checkboxCheck() {
 
     updateButtons(); // Inicializa o estado
 };
+
+function setupCheckboxHandler(tableId, editBtnId, deleteBtnId) {
+    const checkboxes = document.querySelectorAll(`#${tableId} input[type="checkbox"]`);
+    const editBtn = document.getElementById(editBtnId);
+    const deleteBtn = document.getElementById(deleteBtnId);
+
+    function updateButtons() {
+        const checkedCount = document.querySelectorAll(`#${tableId} input[type="checkbox"]:checked`).length;
+
+        if (checkedCount === 0) {
+            editBtn.disabled = true;
+            deleteBtn.disabled = true;
+        } else if (checkedCount === 1) {
+            editBtn.disabled = false;
+            deleteBtn.disabled = false;
+        } else {
+            editBtn.disabled = true;
+            deleteBtn.disabled = false;
+        }
+    }
+
+    checkboxes.forEach(cb => cb.addEventListener("change", updateButtons));
+
+    updateButtons(); // inicializa
+}
+
+// Chame para cada tabela
 
 
 // Função para aplicar os filtros na barra de pesquisa (nos 3 CRUDS, não utiliza banco)
@@ -292,7 +327,8 @@ document.getElementById("user-form").addEventListener("submit", async function (
             if (response.ok) {
                 alert(cpf ? "Usuário editado com sucesso!" : "Usuário cadastrado com sucesso!");
                 document.getElementById("user-form").reset();
-                window.location.reload(); // Recarrega a página para atualizar a tabela
+                fecharFormulario("user-modal")
+                listarUsuarios();
             } else {
                 alert("Erro ao processar a requisição. Tente novamente.");
             }
@@ -362,7 +398,7 @@ async function listarUsuarios() {
                     <td>${new Date(usuario.dataNascimento).toLocaleDateString()}</td>
                 `;
 
-                checkboxCheck();
+                setupCheckboxHandler("user-table", "edit-user", "delete-user");
             });
         } else {
             console.error("Erro ao listar usuários:", response.statusText);
@@ -372,7 +408,6 @@ async function listarUsuarios() {
         console.error("Erro ao se comunicar com o servidor:", error);
     }
 };
-
 // Evento para sempre que a página atualizar, listar os usuarios
 document.addEventListener("DOMContentLoaded", () => {
     listarUsuarios();
@@ -414,19 +449,145 @@ document.getElementById("delete-user").addEventListener("click", async function 
 
 
 // Cadastrar/Editar produto
+document.getElementById("product-form").addEventListener("submit", async function (e) {
 
+        e.preventDefault(); // Impede o envio do formulário padrão
+
+        const produto = {
+            nome: document.getElementById("nome-product").value,
+            preco: document.getElementById("preco").value
+        };
+
+        // const id = document.getElementById("user-modal").getAttribute("data-user-id");
+
+        const id = document.getElementById("product-modal").getAttribute("data-product-id");
+        console.log(id);
+
+        try {
+
+            let response;
+
+            if (id) {
+                response = await fetch(`http://localhost:8080/padaria?id=${id}`, {
+
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(produto)
+
+                });
+
+            } else {
+                // Enviar os dados do usuário para o backend
+                // Depois verificar se precisa do localhost ou não
+                response = await fetch("http://localhost:8080/padaria", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(produto)
+                });
+            }
+
+            if (response.ok) {
+                alert(id ? "Produto editado com sucesso!" : "Produto cadastrado com sucesso!");
+                document.getElementById("product-form").reset();
+                fecharFormulario("product-modal");
+                listarProdutos();
+            } else {
+                alert("Erro ao processar a requisição. Tente novamente.");
+            }
+
+        } catch
+            (error) {
+            alert("Erro ao se comunicar com o servidor. Verifique a conexão.");
+            console.error("Erro:", error);
+        }
+
+        // Fechar o modal
+        //document.getElementById("user-moda
+
+    }
+);
 
 // Buscar produto
 
 // Listar produto
+async function listarProdutos() {
+    try {
+        const response = await fetch("http://localhost:8080/padaria/all");
+        if (response.ok) {
+            const produtos = await response.json();
+            const tabelaBody = document.querySelector("#product-table tbody");
+            tabelaBody.innerHTML = ""; // Limpa a tabela antes de popular
+            produtos.forEach(produto => {
+                const row = tabelaBody.insertRow();
+                row.innerHTML = `
+                    <td style="text-align: center;">
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td>${produto.id}</td>
+                    <td>${produto.nome}</td>
+                    <td>${produto.preco}</td>
+                `;
+
+                setupCheckboxHandler("product-table", "edit-product", "delete-product");
+            });
+        } else {
+            console.error("Erro ao listar os produtos:", response.statusText);
+            alert("Erro ao carregar os produtos. Tente novamente.");
+        }
+    } catch (error) {
+        console.error("Erro ao se comunicar com o servidor:", error);
+    }
+};
+// Evento para sempre que a página atualizar, listar os usuarios
+document.addEventListener("DOMContentLoaded", () => {
+    listarProdutos();
+});
 
 // Deletar produto
+document.getElementById("delete-product").addEventListener("click", async function () {
+    const checkboxSelecionada = document.querySelector('table input[type="checkbox"]:checked');
 
+    if (!checkboxSelecionada) {
+        alert("Selecione um usuário para excluir.");
+        return;
+    }
+
+    const row = checkboxSelecionada.closest("tr");
+    const cells = row.querySelectorAll("td");
+
+    const id = cells[1].textContent.trim();
+
+    if (confirm(`Você tem certeza que deseja excluir o Produto com ID: ${id}?`)) {
+        try {
+            const response = await fetch(`http://localhost:8080/padaria?id=${id}`, {
+                method: "DELETE"
+            });
+
+            if (response.ok) {
+                alert("Produto excluído com sucesso!");
+                listarProdutos();
+            } else {
+                alert("Erro ao excluir o produto. Tente novamente.");
+            }
+        } catch (error) {
+            alert("Erro ao se comunicar com o servidor. Verifique a conexão.");
+            console.error("Erro:", error);
+        }
+    }
+});
 
 // Cadastrar/Editar compra
 
 // Buscar compra
 
 // Listar compra
+setupCheckboxHandler("purchase-table", "edit-purchase", "delete-purchase");
 
 // Deletar compra
