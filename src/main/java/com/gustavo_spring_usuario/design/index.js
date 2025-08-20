@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selecionarBotao(clientesBtn, clientesCrud);
 });
 
-// Evento para abrir Modal
+// Evento para abrir Modal Usuario
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("user-modal");
     const btnNovo = document.getElementById("new-user");
@@ -104,11 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Fechar modal ao clicar fora
-    window.onclick = (event) => {
+    window.addEventListener("click",(event) => {
         if (event.target === modal) {
             modal.classList.remove("show");
         }
-    };
+    });
 
     function limparFormulario() {
         inputNome.value = "";
@@ -125,6 +125,62 @@ document.addEventListener("DOMContentLoaded", () => {
             return `${ano}-${mes.padStart(2, "0")}-${dia.padStart(2, "0")}`;
         }
         return data;
+    }
+});
+
+// Evento para abrir Modal Produto
+document.addEventListener("DOMContentLoaded", () => {
+    const modalProduto = document.getElementById("product-modal");
+    const btnNovoProduto = document.getElementById("new-product");
+    const btnEditarProduto = document.getElementById("edit-product");
+    const spanCloseProduto = modalProduto.querySelector(".close");
+
+    const inputNomeProduto = document.getElementById("nome-product");
+    const inputPrecoProduto = document.getElementById("preco");
+
+
+    // Abrir modal para novo produto (limpa os campos)
+    btnNovoProduto.onclick = () => {
+        limparFormulario();
+        modalProduto.querySelector("h2").textContent = "Novo Produto";
+        modalProduto.classList.add("show");
+    };
+
+    // Abrir modal para edição de usuário
+    btnEditarProduto.onclick = () => {
+        const checkboxSelecionada = document.querySelector('table input[type="checkbox"]:checked');
+        if (!checkboxSelecionada) return;
+
+        const row = checkboxSelecionada.closest("tr");
+        const cells = row.querySelectorAll("td");
+
+        // Preenche o formulário com os dados da tabela
+        const idProduto = cells[1].textContent.trim();
+        inputNomeProduto.value = cells[2].textContent.trim();
+        inputPrecoProduto.value = cells[3].textContent.trim();
+
+
+        modalProduto.setAttribute("data-product-id", idProduto.value);
+
+        modalProduto.querySelector("h2").textContent = "Editar Produto";
+        modalProduto.classList.add("show");
+    };
+
+    // Fechar modal ao clicar no X
+    spanCloseProduto.onclick = () => {
+        modalProduto.classList.remove("show");
+    };
+
+    // Fechar modal ao clicar fora
+    window.addEventListener("click", (event) => {
+        if (event.target === modalProduto) {
+            modalProduto.classList.remove("show");
+        }
+    });
+
+    function limparFormulario() {
+        inputNomeProduto.value = "";
+        inputPrecoProduto.value = "";
     }
 });
 

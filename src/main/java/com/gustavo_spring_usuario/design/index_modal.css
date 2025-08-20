@@ -58,19 +58,19 @@
 }
 
 /* Formulário */
-#user-form {
+form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#user-form input,
-#user-form button {
+form input,
+form button {
     padding: 8px;
     font-size: 14px;
 }
 
-#user-form button {
+form button {
     background-color: #333;
     color: white;
     border: none;
@@ -78,6 +78,6 @@
     cursor: pointer;
 }
 
-#user-form button:hover {
+form button:hover {
     background-color: #555;
 }
