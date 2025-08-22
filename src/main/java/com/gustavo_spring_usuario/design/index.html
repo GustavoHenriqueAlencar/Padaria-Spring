@@ -187,7 +187,7 @@
             <div id="compras-crud" class="crud-container" style="display: none">
                 <div class="crud-actions" >
                     <input type="text" id="search-input-pedidos" placeholder="Pesquisar Compras...">
-                    <button id="new-purchase">Novo Usuário</button>
+                    <button id="new-purchase">Novo Pedido</button>
                     <button id="edit-purchase" disabled>Editar</button>
                     <button id="delete-purchase" disabled>Excluir</button>
                 </div>
@@ -199,7 +199,8 @@
                             <tr>
                                 <th></th>
                                 <th>ID</th>
-                                <th>Usuario_ID</th>
+                                <th>Usuario</th>
+                                <th>Produtos</th>
                                 <th>Valor Total</th>
                                 <th>Data Compra</th>
 
@@ -218,6 +219,7 @@
                                 <td>teste</td>
                                 <td>teste</td>
                                 <td>teste</td>
+                                <td>teste</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center;">
@@ -226,6 +228,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </td>
+                                <td>teste</td>
                                 <td>teste</td>
                                 <td>teste</td>
                                 <td>teste</td>
@@ -293,6 +296,33 @@
 
                 <label for="preco">Preço:</label>
                 <input type="number" id="preco" name="preco" required>
+
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="purchase-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Novo Produto</h2>
+            <form id="purchase-form">
+
+
+                <label for="usuario-id">Usuário:</label>
+                <select id="usuario-id" name="usuario-id" required>
+                    <option value="">Selecione um usuário</option>
+                </select>
+<!--                <input type="text" id="usuario-id" name="usuario-id" required>-->
+
+                <label for="produtos-id">Produtos:</label>
+                <div id="produtos-id" name="produtosIds" style="height: 120px;">
+                    <!-- opções serão carregadas via JS -->
+                </div>
+
+
+                <!--                <input type="text" id="produtos-id" name="produtos-id" required>-->
+
 
                 <button type="submit">Salvar</button>
             </form>

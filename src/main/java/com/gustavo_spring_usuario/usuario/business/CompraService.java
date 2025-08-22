@@ -39,6 +39,11 @@ public class CompraService {
 
     }
 
+    public List<Compra> listarCompras() {
+        return compraRepository.findAll();
+    }
+
+
     public List<Compra> buscarCompraComDTO(CompraRequestDTO dto) {
 
         List<Compra> busca = (dto.getUsuarioId() != null) ? compraRepository.findAllByUsuarioId(dto.getUsuarioId())

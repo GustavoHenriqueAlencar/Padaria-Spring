@@ -65,7 +65,8 @@ form {
 }
 
 form input,
-form button {
+form button,
+form select{
     padding: 8px;
     font-size: 14px;
 }

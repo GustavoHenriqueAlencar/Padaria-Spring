@@ -3,6 +3,7 @@ package com.gustavo_spring_usuario.usuario.controller;
 import com.gustavo_spring_usuario.usuario.business.CompraService;
 import com.gustavo_spring_usuario.usuario.dto.CompraRequestDTO;
 import com.gustavo_spring_usuario.usuario.infrastructure.entitys.Compra;
+import com.gustavo_spring_usuario.usuario.infrastructure.entitys.Padaria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,12 @@ public class CompraController {
         List<Compra> compras = compraService.buscarCompraComDTO(dto);
         return ResponseEntity.ok(compras);
 
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Compra>> listarCompras() {
+        List<Compra> compras = compraService.listarCompras();
+        return ResponseEntity.ok(compras);
     }
 
     @DeleteMapping
