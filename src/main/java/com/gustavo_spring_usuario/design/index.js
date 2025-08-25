@@ -1,6 +1,7 @@
 const API_BASE = window.location.hostname === "localhost"
     ? "http://localhost:8080"
     : "https://padaria-spring.onrender.com";
+console.log("API_BASE =", API_BASE);
 
 // Evento para sempre que mover o mouse no topo, abrir navbar
 window.addEventListener("mousemove", function (event) {
