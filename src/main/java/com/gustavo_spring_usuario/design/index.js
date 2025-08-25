@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnEditarCompra = document.getElementById("edit-purchase");
     const spanCloseCompra = modalCompra.querySelector(".close");
 
-    const inputusuarioId = document.getElementById("usuario-id");
+    const inputUsuarioId = document.getElementById("usuario-id");
     const inputProdutosId = document.getElementById("produtos-id");
 
     // Abrir modal para novo produto (limpa os campos)
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     };
 
-    // Abrir modal para edição de usuário
+    // Abrir modal para edição de compra
     btnEditarCompra.onclick = () => {
         const checkboxSelecionada = document.querySelector('table input[type="checkbox"]:checked');
         if (!checkboxSelecionada) return;
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Preenche o formulário com os dados da tabela
         const idCompra = cells[1].textContent.trim();
-        inputusuarioId.value = cells[2].textContent.trim();
+        inputUsuarioId.value = cells[2].textContent.trim();
         inputProdutosId.value = cells[3].textContent.trim();
 
 
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function limparFormulario() {
-        inputusuarioId.value  = "";
+        inputUsuarioId.value  = "";
         inputProdutosId.value = "";
     }
 });
@@ -706,9 +706,7 @@ document.getElementById("purchase-form").addEventListener("submit", async functi
 
         const compra = {
             usuarioId: document.getElementById("usuario-id").value,
-            produtosIds: document.getElementById("produtos-id").value
-                .split(",") // quebra em lista
-                .map(produtoId => Number(produtoId.trim())) // transforma em número            dataCompra: document.getElementById("data-compra").value,
+            produtosIds: getProdutosSelecionados()
         };
 
         // const id = document.getElementById("user-modal").getAttribute("data-user-id");
@@ -802,3 +800,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Deletar compra
+document.getElementById("delete-purchase").addEventListener("click", async function () {
+    const checkboxSelecionada = document.querySelector('table input[type="checkbox"]:checked');
+
+    if (!checkboxSelecionada) {
+        alert("Selecione um usuário para excluir.");
+        return;
+    }
+
+    const row = checkboxSelecionada.closest("tr");
+    const cells = row.querySelectorAll("td");
+
+    const id = cells[1].textContent.trim();
+
+    if (confirm(`Você tem certeza que deseja excluir a Compra com ID: ${id}?`)) {
+        try {
+            const response = await fetch(`http://localhost:8080/compra?id=${id}`, {
+                method: "DELETE"
+            });
+
+            if (response.ok) {
+                alert("Produto excluído com sucesso!");
+                listarCompras();
+            } else {
+                alert("Erro ao excluir o produto. Tente novamente.");
+            }
+        } catch (error) {
+            alert("Erro ao se comunicar com o servidor. Verifique a conexão.");
+            console.error("Erro:", error);
+        }
+    }
+});
