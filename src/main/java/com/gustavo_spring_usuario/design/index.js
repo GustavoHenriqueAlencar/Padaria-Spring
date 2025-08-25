@@ -1,3 +1,7 @@
+const API_BASE = window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "https://padaria-spring.onrender.com";
+
 // Evento para sempre que mover o mouse no topo, abrir navbar
 window.addEventListener("mousemove", function (event) {
     var navbar = document.getElementById("navbar");
@@ -243,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function carregarUsuarios() {
-    const response = await fetch("http://localhost:8080/usuario/all");
+    const response = await fetch(`${API_BASE}/usuario/all`);
     if (response.ok) {
         const usuarios = await response.json();
         const select = document.getElementById("usuario-id");
@@ -278,7 +282,7 @@ async function carregarUsuarios() {
 // }
 
 async function carregarProdutos() {
-    const response = await fetch("http://localhost:8080/padaria/all");
+    const response = await fetch(`${API_BASE}/padaria/all`);
     if (response.ok) {
         const produtos = await response.json();
         const container = document.getElementById("produtos-id");
@@ -418,7 +422,7 @@ document.getElementById("user-form").addEventListener("submit", async function (
             let response;
 
             if (cpf) {
-                response = await fetch(`http://localhost:8080/usuario?cpf=${cpf}`, {
+                response = await fetch(`${API_BASE}/usuario?cpf=${cpf}`, {
 
                     method: "PUT",
                     headers: {
@@ -431,7 +435,7 @@ document.getElementById("user-form").addEventListener("submit", async function (
             } else {
                 // Enviar os dados do usuário para o backend
                 // Depois verificar se precisa do localhost ou não
-                response = await fetch("http://localhost:8080/usuario", {
+                response = await fetch(`${API_BASE}/usuario`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -475,7 +479,7 @@ async function buscarUsuario() {
     const cpf = document.getElementById("search-input").value;
 
     try {
-        const response = await fetch(`http://localhost:8080/usuario?cpf=${cpf}`);
+        const response = await fetch(`${API_BASE}/usuario?cpf=${cpf}`);
         if (response.ok) {
             const usuario = await response.json();
 
@@ -492,7 +496,7 @@ async function buscarUsuario() {
 // Função para listar os usuarios na tabela
 async function listarUsuarios() {
     try {
-        const response = await fetch("http://localhost:8080/usuario/all");
+        const response = await fetch(`${API_BASE}/usuario/all`);
         if (response.ok) {
             const usuarios = await response.json();
             const tabelaBody = document.querySelector("#user-table tbody");
@@ -546,7 +550,7 @@ document.getElementById("delete-user").addEventListener("click", async function 
 
     if (confirm(`Você tem certeza que deseja excluir o usuário com CPF: ${cpf}?`)) {
         try {
-            const response = await fetch(`http://localhost:8080/usuario?cpf=${cpf}`, {
+            const response = await fetch(`${API_BASE}/usuario?cpf=${cpf}`, {
                 method: "DELETE"
             });
 
@@ -584,7 +588,7 @@ document.getElementById("product-form").addEventListener("submit", async functio
             let response;
 
             if (id) {
-                response = await fetch(`http://localhost:8080/padaria?id=${id}`, {
+                response = await fetch(`${API_BASE}/padaria?id=${id}`, {
 
                     method: "PUT",
                     headers: {
@@ -597,7 +601,7 @@ document.getElementById("product-form").addEventListener("submit", async functio
             } else {
                 // Enviar os dados do usuário para o backend
                 // Depois verificar se precisa do localhost ou não
-                response = await fetch("http://localhost:8080/padaria", {
+                response = await fetch(`${API_BASE}/padaria`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -632,7 +636,7 @@ document.getElementById("product-form").addEventListener("submit", async functio
 // Listar produto
 async function listarProdutos() {
     try {
-        const response = await fetch("http://localhost:8080/padaria/all");
+        const response = await fetch(`${API_BASE}/padaria/all`);
         if (response.ok) {
             const produtos = await response.json();
             const tabelaBody = document.querySelector("#product-table tbody");
@@ -682,7 +686,7 @@ document.getElementById("delete-product").addEventListener("click", async functi
 
     if (confirm(`Você tem certeza que deseja excluir o Produto com ID: ${id}?`)) {
         try {
-            const response = await fetch(`http://localhost:8080/padaria?id=${id}`, {
+            const response = await fetch(`${API_BASE}/padaria?id=${id}`, {
                 method: "DELETE"
             });
 
@@ -718,7 +722,7 @@ document.getElementById("purchase-form").addEventListener("submit", async functi
             let response;
 
             if (idCompra) {
-                response = await fetch(`http://localhost:8080/compra?id=${idCompra}`, {
+                response = await fetch(`${API_BASE}/compra?id=${idCompra}`, {
 
                     method: "PUT",
                     headers: {
@@ -731,7 +735,7 @@ document.getElementById("purchase-form").addEventListener("submit", async functi
             } else {
                 // Enviar os dados da compra para o backend
                 // Depois verificar se precisa do localhost ou não
-                response = await fetch("http://localhost:8080/compra", {
+                response = await fetch(`${API_BASE}/compra`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -763,7 +767,7 @@ document.getElementById("purchase-form").addEventListener("submit", async functi
 // Listar compra
 async function listarCompras() {
     try {
-        const response = await fetch("http://localhost:8080/compra/all");
+        const response = await fetch(`${API_BASE}/compra/all`);
         if (response.ok) {
             const compras = await response.json();
             const tabelaBody = document.querySelector("#purchase-table tbody");
@@ -815,7 +819,7 @@ document.getElementById("delete-purchase").addEventListener("click", async funct
 
     if (confirm(`Você tem certeza que deseja excluir a Compra com ID: ${id}?`)) {
         try {
-            const response = await fetch(`http://localhost:8080/compra?id=${id}`, {
+            const response = await fetch(`${API_BASE}/compra?id=${id}`, {
                 method: "DELETE"
             });
 
