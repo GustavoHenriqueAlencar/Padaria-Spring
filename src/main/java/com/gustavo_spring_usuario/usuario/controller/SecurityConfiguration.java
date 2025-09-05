@@ -38,7 +38,9 @@ public class SecurityConfiguration {
         http .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/usuario/**").permitAll()
+                        .requestMatchers("/usuarios/**").permitAll()
+                        .requestMatchers("/padarias/**").permitAll()
+                        .requestMatchers("/compra/**").permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

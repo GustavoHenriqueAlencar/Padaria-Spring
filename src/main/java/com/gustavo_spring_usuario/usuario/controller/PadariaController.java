@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/padaria")
+@RequestMapping("/padarias")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:63342")
 
@@ -23,7 +23,7 @@ public class PadariaController {
     public ResponseEntity<Padaria> cadastrarPadaria(@RequestBody Padaria padaria) {
         Padaria padariaCriada = padariaService.cadastrarPadaria(padaria);
         return ResponseEntity
-                .created(URI.create("/padaria/" + padariaCriada.getId()))
+                .created(URI.create("/padarias/" + padariaCriada.getId()))
                 .body(padariaCriada);
     }
     @GetMapping

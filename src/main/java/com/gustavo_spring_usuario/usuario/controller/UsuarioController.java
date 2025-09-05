@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:63342")
 
@@ -25,7 +25,7 @@ public class UsuarioController {
 
 
        return ResponseEntity
-               .created(URI.create("/usuario/" + usuarioCriado.getCpf()))  // Adiciona a URI do recurso criado
+               .created(URI.create("/usuarios/" + usuarioCriado.getCpf()))  // Adiciona a URI do recurso criado
                .body(usuarioCriado);
    }
    @GetMapping
